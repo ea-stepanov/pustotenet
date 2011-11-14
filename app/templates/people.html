@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/people.css" type="text/css" />
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var link_to_self = $('#main_links a[href*="{% url people %}"]');
+            link_to_self.next('br').after('<img src="{{ MEDIA_URL }}images/main/people.jpg" width="100px"/><br/>')
+        })
+    </script>
+{% endblock %}
+
+{% block title %}Это мы{% endblock %}
+
+{% block content %}
+    <div id="main_links">
+        <a href="{% url people %}">Это мы</a><br/>
+        <a href="{% url articles %}">Статьи</a><br/>
+        <a href="{% url videos %}">Видео</a> <br/>
+        <a href="{% url photogallery %}">Фотогаллерея</a><br/>
+        <a href="javascript:void(0);">Новое на сайте</a><br/>
+    </div>
+
+    <div id="section_content">
+        {% for man in people %}
+        <span class="man">
+            <a href="{{ man.get_absolute_url|safe }}"><img src="{{ man.photo.url|safe }}" height="128px"/></a><br clear="all"/>
+            <a href="{{ man.get_absolute_url|safe }}">{{ man.name }}</a>
+        </span>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/videos.css" type="text/css" />
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var link_to_self = $('#main_links a[href*="{% url videos %}"]');
+            link_to_self.next('br').after('<img src="{{ MEDIA_URL }}images/main/video.jpg" width="100px"/><br/>')
+        })
+    </script>
+{% endblock %}
+
+{% block title %}Видео{% endblock %}
+
+{% block content %}
+    <div id="main_links">
+        <a href="{% url people %}">Это мы</a><br/>
+        <a href="{% url articles %}">Статьи</a><br/>
+        <a href="{% url videos %}">Видео</a> <br/>
+        <a href="{% url photogallery %}">Фотогаллерея</a><br/>
+        <a href="javascript:void(0);">Новое на сайте</a><br/>
+    </div>
+
+    <div id="videos_list">
+        {% for video in videos %}
+        <div>
+            <h3><a href="{{ video.get_absolute_url|safe }}">{{ video.name }}</a></h3>
+            {{ video.inlineCode|safe }}
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

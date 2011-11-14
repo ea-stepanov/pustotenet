@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="{{ MEDIA_URL }}css/pustotenet.css" type="text/css" />
+{#		<link rel="stylesheet" href="/media/css/lightbox.css" type="text/css" media="screen" />#}
+		
+{#		<script type="text/javascript" src="/media/js/lightbox/prototype.js"></script>#}
+{#		<script type="text/javascript" src="/media/js/lightbox/scriptaculous.js?load=effects,builder"></script>#}
+{#		<script type="text/javascript" src="/media/js/lightbox/lightbox.js"></script>#}
+        <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.4.1.min.js"></script>
+
+        {% block styles %}{% endblock %}
+        {% block scripts %}{% endblock %}
+		
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <div id="all_inf">
+        {% block header %}
+            <div id="header">
+                <a href="/"><img src="{{ MEDIA_URL }}images/main/logo.jpg" /></a>
+            </div>
+        {% endblock %}
+        {% block content %}{% endblock %}
+        {% block footer %}{% endblock %}
+        </div>
+    </body>
+</html>

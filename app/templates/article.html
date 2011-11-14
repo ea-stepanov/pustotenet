@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/article.css" type="text/css" />
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var link_to_self = $('#main_links a[href*="{% url articles %}"]');
+            link_to_self.next('br').after('<img src="{{ MEDIA_URL }}images/main/articles.jpg" width="100px"/><br/>')
+        })
+    </script>
+{% endblock %}
+
+{% block title %}{{ article.name }}{% endblock %}
+
+{% block content %}
+    <div id="main_links">
+        <a href="{% url people %}">Это мы</a><br/>
+        <a href="{% url articles %}">Статьи</a><br/>
+        <a href="{% url videos %}">Видео</a> <br/>
+        <a href="{% url photogallery %}">Фотогаллерея</a><br/>
+        <a href="javascript:void(0);">Новое на сайте</a><br/>
+    </div>
+    
+    <div id="article">
+        <h1>{{ article.name }}</h1>
+        <p>{{ article.text|safe }}</p>
+        <p style="text-align: right;">{{ article.created_at|date:"d-m-Y" }}</p>
+        <p style="text-align: right">
+        {% for author in article.authors.all %}
+            {{ author.name }} <br/>
+        {%  endfor %}
+        </p>
+        <form action="" method="POST" name="formcomment" id="id_fromcomment">
+            {% csrf_token %}
+            {{ form.media }}
+            <table>
+                <colgroup>
+                    <col id='col1'/>
+                    <col id='col2'/>
+                    <col id='col3'/>
+                </colgroup>
+                <tr>
+                    <th>{{ form.name.label }}</th>
+                    <td>{{ form.name }}</td>
+                </tr>
+                {% if form.message.errors %}
+                <tr>
+                    <td/>
+                    <td colspan="2" style="color:red">
+                    {% for error in form.message.errors %}
+                        {{ error }} <br/>
+                    {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Комментарий<span style="color:red">*</span>:</th>
+                    <td colspan="2">{{ form.message }}</td>
+                </tr>
+                {% if form.captcha.errors %}
+                    <tr>
+                        <td/>
+                        <td colspan = 2 style="color:red;">
+                        {% for error in form.captcha.errors %}
+                            {{ error }}<br/>
+                        {% endfor %}
+                        </td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Код <span style="color:red">*</span>: </th>
+                    <td>{{ form.captcha }} </td>
+                    <td style="text-align: right; padding-right: 3%;"><input type="submit" value="Отправить"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan='2' style="width: 95%;"><img src="../../media/images/captcha.png" /></td>
+                </tr>
+             </table>
+             <input type="hidden" name="article" value="{{ article.id }}"/>
+             <span style="color:red">*</span> поля, обязательные для заполнения
+        </form>
+    </div>
+{% endblock %}

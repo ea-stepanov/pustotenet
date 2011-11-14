@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css"/>
+{% endblock %}
+
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+    <div id="links">
+        <a href="{% url people %}"><img src="{{ MEDIA_URL }}images/main/people.jpg"/></a>
+        <a href="{% url articles %}"><img src="{{ MEDIA_URL }}images/main/articles.jpg"/></a>
+        <a href="{% url videos %}"><img src="{{ MEDIA_URL }}images/main/video.jpg"/></a> <br/>
+        <a href="{% url photogallery %}"><img src="{{ MEDIA_URL }}images/main/photogallery.jpg"/></a>
+        <a href="javascript:void(0);"><img src="{{ MEDIA_URL }}images/main/blank.jpg"/></a>
+        <a href="javascript:void(0);"><img src="{{ MEDIA_URL }}images/main/news.jpg"/></a>
+    </div>
+{% endblock %}

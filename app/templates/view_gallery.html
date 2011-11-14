@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>{{ album_name }}</title>
+</head>
+<body>
+    <table>
+        {% for row in photos %}
+        <tr>
+            {% for photo in row %}
+            <td>
+                <a href="{{ photo.get_absolute_url|safe }}"><img src='{{ photo.get_thumb_url|safe }}' width="{{ photo.get_thumb_width }}"  height="{{ photo.get_thumb_height }}" align="{{ photo.description }}"/><br clear="all"/></a>
+                <a href="{{ photo.get_absolute_url|safe }}">{{ photo.description }}</a>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

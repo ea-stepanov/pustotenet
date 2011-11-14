@@ -1,0 +1,41 @@
+{%  extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/man_materials.css" />
+{% endblock %}
+
+{% block title %} Материалы от {{ man.name }} {% endblock %}
+
+{% block content %}
+    <div id="main_links">
+        <a href="{% url people %}">Это мы</a><br/>
+        <a href="{% url articles %}">Статьи</a><br/>
+        <a href="{% url videos %}">Видео</a> <br/>
+        <a href="{% url photogallery %}">Фотогаллерея</a><br/>
+        <a href="javascript:void(0);">Новое на сайте</a><br/>
+    </div>
+
+    <div id="materials">
+    <h1>Материалы от {{ man.name }}</h1>
+    <h3 style="margin-top: 15px;">Статьи</h3>
+    {% if articles %}
+    {% for article in articles %}
+        <p><a href="{{ article.get_absolute_url|safe }}">{{ article.name }}</a></p>
+    {% endfor %}
+    {% else %}
+        <p>Данный автор пока не написал своей первой статьи! Ждем!</p>
+    {% endif %}
+
+    <h3 style="margin-top: 15px;">Видео</h3>
+    {% if videos %}
+    {% for video in videos %}
+        <div style="margin-bottom: 20px;">
+            <h3><a href="{{ video.get_absolute_url|safe }}">{{ video.name }}</a></h3>
+            {{ video.inlineCode|safe }}
+        </div>
+    {% endfor %}
+    {% else %}
+        <p>Данный автор пока не снял своего первого видео! Ждем!</p>
+    {% endif %}
+    </div>
+{% endblock %}

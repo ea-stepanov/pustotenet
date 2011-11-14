@@ -1,0 +1,29 @@
+#header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#main_links {
+    float: left;
+}
+
+#main_links a {
+    line-height: 150%;
+}
+
+#main_links img {
+    border: solid 1px #add8e6;
+}
+
+#section_content {
+    float: left;
+    width: 80%;
+    padding-left: 80px;
+}
+
+#section_content .man {
+    float: left;
+    margin: 10px 10px;
+    text-align: center;
+    line-height: 200%;
+}

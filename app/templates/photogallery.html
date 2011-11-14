@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/photogallery.css" type="text/css" />
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var link_to_self = $('#main_links a[href*="{% url photogallery %}"]');
+            link_to_self.next('br').after('<img src="{{ MEDIA_URL }}images/main/photogallery.jpg" width="100px"/><br/>')
+        })
+    </script>
+{% endblock %}
+
+{% block title %}Фотогаллерея{% endblock %}
+
+{% block content %}
+    <div id="main_links">
+        <a href="{% url people %}">Это мы</a><br/>
+        <a href="{% url articles %}">Статьи</a><br/>
+        <a href="{% url videos %}">Видео</a> <br/>
+        <a href="{% url photogallery %}">Фотогаллерея</a><br/>
+        <a href="javascript:void(0);">Новое на сайте</a><br/>
+    </div>
+    
+    <div id="album_list">
+        {% for album in albums %}
+        <p>
+            <img src="{{ album.cover.url|safe }}" align="left" />
+            <span><a href={{ album.get_absolute_url|safe }}>{{ album.name }}</a></span> <br/>
+            <span>{{ album.description }}</span>
+        </p>
+        {% endfor %}
+    </div>
+{% endblock %}

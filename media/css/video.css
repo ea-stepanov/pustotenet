@@ -1,0 +1,30 @@
+#header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#information {
+    margin: 10px 0px;
+}
+
+#main_links {
+    float: left;
+}
+
+#main_links a {
+    line-height: 150%;
+}
+
+#main_links img {
+    border: solid 1px #add8e6;
+}
+
+#video {
+    float: left;
+    width: 80%;
+    padding-left: 80px;
+}
+
+#video form {
+    margin-top: 40px;
+}
